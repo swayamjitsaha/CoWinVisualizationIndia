@@ -112,7 +112,7 @@ ggplot(filtered_data, aes(x = Gender, y = Total.Individuals.Vaccinated., fill = 
   theme_minimal()
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example1.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example1.png)
 
 # Example 2. Time series of Initial Cases in Kerala from 1/30/2020 to 3/1/2020
 
@@ -125,7 +125,7 @@ ggplot(data = filtered_covid_data1, mapping = aes(x = Sno, y = Confirmed)) +
   geom_point(mapping = aes(color = "Red"))
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example2.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example2.png)
 
   
 # Example 3. Time series of Total Doses Administered Vaccination Initially in Random states
@@ -138,7 +138,7 @@ ggplot(data = filtered_covid_data2, mapping = aes(x = Total.Doses.Administered, 
   geom_point(mapping = aes(color = "Red"))
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example3.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example3.png)
 
 # Example 4. Graph plot to visualize females vaccination status from West Bengal in the period 27/06/2021 to 07/07/2021
 covid_data3 <- read.csv("dataset1.csv")
@@ -152,7 +152,7 @@ ggplot(data = filtered_covid_data3, mapping = aes(x = Female.Individuals.Vaccina
 In this case it does not show any plotting in the graph. This is because data is missing in this region of the dataset. Hence, there is some level of inconsistency in the dataset.
 
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example4.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example4.png)
 
 # Example 5. Graph plot to visualize the installation of vaccine sites throughout 2020 to 2021
 
@@ -168,7 +168,7 @@ ggplot(data = covid_data3, mapping = aes(x = Sessions, y= Sites)) +
 This graph plot shows that India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions on the common populi.
 
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5.png)
 
 
 The same data if produced in a histogram produces the result:
@@ -177,7 +177,7 @@ ggplot(data = covid_data3) +
   geom_histogram(mapping = aes(x = Sessions), bins = 100)
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5histogram.png?raw=true)
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5histogram.png)
 
 # Example 6. Graph plot to visualize the state of Odisha in India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions
 
