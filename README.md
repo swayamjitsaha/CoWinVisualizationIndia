@@ -114,7 +114,9 @@ ggplot(filtered_data, aes(x = Gender, y = Total.Individuals.Vaccinated., fill = 
   theme_minimal()
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example1.png)
+<p align="center">
+  <img width="40%" src="example1output.png">
+ </p>
 
 # Example 2. Time series of Initial Cases in Kerala from 1/30/2020 to 3/1/2020
 
@@ -127,8 +129,8 @@ ggplot(data = filtered_covid_data1, mapping = aes(x = Sno, y = Confirmed)) +
   geom_point(mapping = aes(color = "Red"))
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example2.png)
-
+<p align="center">
+  <img width="40%" src="Rplot01.png">
   
 # Example 3. Time series of Total Doses Administered Vaccination Initially in Random states
 covid_data <- read.csv("dataset1.csv")
@@ -140,8 +142,10 @@ ggplot(data = filtered_covid_data2, mapping = aes(x = Total.Doses.Administered, 
   geom_point(mapping = aes(color = "Red"))
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example3.png)
-
+<p align="center">
+  <img width="40%" src="example3.png">
+ </p>
+ 
 # Example 4. Graph plot to visualize females vaccination status from West Bengal in the period 27/06/2021 to 07/07/2021
 covid_data3 <- read.csv("dataset1.csv")
 filtered_covid_data3 <- covid_data3 %>%
@@ -154,8 +158,10 @@ ggplot(data = filtered_covid_data3, mapping = aes(x = Female.Individuals.Vaccina
 In this case it does not show any plotting in the graph. This is because data is missing in this region of the dataset. Hence, there is some level of inconsistency in the dataset.
 
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example4.png)
-
+<p align="center">
+  <img width="40%" src="example4.png">
+ </p>
+ 
 # Example 5. Graph plot to visualize the installation of vaccine sites throughout 2020 to 2021
 
 Now, let's try to visualize how the vaccine sites accomodation has changed over the time with respect to the sessions of vaccine doses. 
@@ -170,8 +176,9 @@ ggplot(data = covid_data3, mapping = aes(x = Sessions, y= Sites)) +
 This graph plot shows that India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions on the common populi.
 
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5.png)
-
+<p align="center">
+  <img width="40%" src="Rplot02.png">
+ </p>
 
 The same data if produced in a histogram produces the result:
 
@@ -179,8 +186,10 @@ ggplot(data = covid_data3) +
   geom_histogram(mapping = aes(x = Sessions), bins = 100)
   
 The output of the above code is given below:
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5histogram.png)
-
+<p align="center">
+  <img width="40%" src="Rplot03.png">
+ </p>
+ 
 # Example 6. Graph plot to visualize the state of Odisha in India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions
 
 This graph plot shows for the state of Odisha in India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions on the common populi after making a slight degradation it has made a steep positive slope indicating the success in setting up new vaccination sites for vaccination purpose.
@@ -191,8 +200,10 @@ ggplot(data = covid_data4, mapping = aes(x = Sessions, y = Sites)) +
   geom_smooth()
 
 The output of the above code is given below:
-example6.png  
-
+<p align="center">
+  <img width="40%" src="Rplot04.png">
+ </p>
+ 
 # Discussion
 
 Our plots suggest that India had tactfully increased the number of vaccination sites across all states to expedite the process of curbing the spread of Covid-19 virus all over the country. The increased number of vaccination sites allowed more vaccination sessions to be conducted thereby making the general population of the people vaccinated to stop the spread of the virus. We also discussed the sudden spike in covid cases initially when Covid-19 hit the country. The spike was found in the state of Kerala and it was essential to know how the cases across Kerala and then further. 
@@ -205,6 +216,9 @@ India, faced with the formidable challenge of the COVID-19 pandemic, exhibited r
 
 The pilot study can be expanded to study the vaccination records and mitigation strategies for other countries.  
 
+<p align="center">
+  <img width="40%" src="cnnhoarding.jpg">
+ </p>
 # References
 
 https://www.kaggle.com/datasets/sudalairajkumar/covid19-in-india/
@@ -214,10 +228,3 @@ https://r4ds.had.co.nz/tidy-data.html
 https://www.mohfw.gov.in/
 https://www.covid19india.org/
 https://www.isibang.ac.in/~athreya/incovid19/
-
-
-
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
