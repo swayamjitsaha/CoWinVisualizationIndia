@@ -1,7 +1,220 @@
 # CoWinVisualizationIndia
 Graph visualizations to show the spread of Covid-19 virus in India and how India won the fight against the virus by vaccination mitigation strategies
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+Project Goal
+
+We intend to visualize the Covid 19 infection and vaccination patterns across various geographical states of India from the years 2020 through 2021 using the various plots discussed in class. We also preprocess and clean the data by removing any inconsistencies, null values and outliers so that it can be visualized properly. Overall, we provide valuable insights that can inform public health measures, resource allocation, and strategies for managing and controlling the spread of the virus.
+
+We follow the following control map:
+
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/model.PNG?raw=true)
+
+# Step 1: Setting Working Directory for Experiment
+Firstly, we set the working directory under Sessions Tab to access the corresponding CSV files for data processing purpose.
+
+# Step 2: Installing necessary libraries
+install.packages("tidyverse")
+install.packages("ggplot2")
+install.packages("maps")
+
+# Step 3: Load the necessary libraries
+library(tidyverse)
+library(ggplot2)
+library(maps)
+
+# Step 4: Cleaning the datasets and making it ready for processing
+As an essential step of cleaning the dataset, we remove the blank spaces and replace them with dots in the column names for example "First Doses Administered" to "First.Doses.Administered". This was basically done so that fetching the column names becomes easy during function calling. We save the new data in a new CSV and name the file as `dataset1.csv`.
+
+In order to do the above steps, the following code chunk has been implemented:
+
+# Read data from CSV file
+covid_data <- read.csv("covid_vaccine_statewise.csv", stringsAsFactors = FALSE)
+
+# Remove blank spaces from column names
+colnames(covid_data) <- gsub(" ", "", colnames(covid_data))
+
+# Save the modified data to the existing CSV file
+write.csv(covid_data, "dataset1.csv", row.names = FALSE)
+
+##############################
+
+# Libraries and their functions 
+
+We know that data visualization is accomplished by a package called `ggplot2`.  This package is part of a larger group of related packages called `tidyverse`. Hence, we need to install the package `tidyverse`.
+
+# Explore the structure of the raw data
+
+It is essential to know the structure of the raw data before processing is done. To know the structure of the raw data, we implement str() function.
+str(covid_data)  
+
+The above function returns 7845 records (rows) and 24 variables (columns).
+
+It is essential to know that the blank values in the attribute fields has been substituted with NA values for our convenience. In later times, we can safely discard the NA values and deal with the original integer or character values whenever necessary.
+
+# Step 5: Tidying the data
+
+Next step, we try to tidy the data. Tidy data in R refers to a specific structure of data that makes it easier to work with and analyze using various R packages, particularly those in the tidyverse (e.g., dplyr, ggplot2). Tidy data principles, as introduced by Hadley Wickham, promote a standardized way of organizing data that facilitates efficient analysis and visualization.
+
+# Tidying the covid_vaccine_statewise.csv data
+
+covid_data <- read.csv("dataset1.csv", stringsAsFactors = FALSE) # Loading the dataset1.csv to the covid_data variable
+
+tidy_covid_data <- covid_data %>%
+  # Handle missing values if necessary
+  # Example: drop rows with any missing values
+  drop_na() %>%           
+  
+  # Convert Date to a Date object
+  mutate(Date = as.Date(Date, format = "%d/%m/%Y"))
+  
+Here the `dataset1.csv` is assigned to the variable `covid_data`. In return the `covid_data` variable is reassigned to the variable `tidy_covid_data` and undergone through drop_na() function which drops the NA values for the corresponding data frames. The variable also undergoes through the mutate() function, which is used for creating or modifying variables (columns) in a data frame. For example here the mutate() function changes the Date format to Day/Month/Year.
+
+We can also use `pivot` functions for reshaping or transforming data from a wide format to a long format or vice versa. There are different functions for pivoting, for example the pivot_longer and pivot_wider functions from the tidyverse package, part of the tidyverse, are commonly used for these tasks. We essentially did not use `pivot` functions here but a general example is given below:
+
+  # Example: If you have separate columns for confirmed, recovered, and deaths, pivot to long format
+  pivot_longer(cols = c(Confirmed, Deaths),
+               names_to = "Status",
+               values_to = "Count")
+
+# Finally exploring the structure of the new tidy data
+str(tidy_covid_data)
+
+# Save the tidy data to a new CSV file
+write.csv(tidy_covid_data, "tidy_dataset1.csv", row.names = FALSE)
+
+# Step 6: Creating plots for visualization
+
+# Example 1. Visualizing Male vs. Female Vaccine Doses Administered for a particular date of the month
+
+# Load libraries
+library(ggplot2)
+library(tidyverse) 
+
+# Read data from CSV file
+vaccine_data <- read.csv("dataset2.csv", stringsAsFactors = FALSE)
+
+# Convert Date to a Date object
+vaccine_data$Updated.On <- as.Date(vaccine_data$Updated.On, format = "%d/%m/%Y")
+
+# Specify the particular date (replace '2022-01-15' with your desired date)
+selected_date <- as.Date('16/01/2021')
+
+# Filter data for the selected date
+filtered_data <- vaccine_data %>% filter(Updated.On == selected_date)
+
+# Create a bar graph
+ggplot(filtered_data, aes(x = Gender, y = Total.Individuals.Vaccinated., fill = Gender)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = paste("Individuals Vaccinated by Gender on", format(selected_date, "%d/%m/%Y")),
+       x = "Gender",
+       y = "Total Individuals Vaccinated",
+       fill = "Gender") +
+  theme_minimal()
+  
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example1.png?raw=true)
+
+# Example 2. Time series of Initial Cases in Kerala from 1/30/2020 to 3/1/2020
+
+# Filter data for the specified date range
+covid_data <- read.csv("covid_19_india.csv")
+filtered_covid_data1 <- covid_data %>%
+  filter(Sno >= 1, Sno <=32)
+  
+ggplot(data = filtered_covid_data1, mapping = aes(x = Sno, y = Confirmed)) +
+  geom_point(mapping = aes(color = "Red"))
+  
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example2.png?raw=true)
+
+  
+# Example 3. Time series of Total Doses Administered Vaccination Initially in Random states
+covid_data <- read.csv("dataset1.csv")
+
+filtered_covid_data2 <- covid_data %>%
+  filter(State == "India")
+
+ggplot(data = filtered_covid_data2, mapping = aes(x = Total.Doses.Administered, y = Sno)) +
+  geom_point(mapping = aes(color = "Red"))
+  
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example3.png?raw=true)
+
+# Example 4. Graph plot to visualize females vaccination status from West Bengal in the period 27/06/2021 to 07/07/2021
+covid_data3 <- read.csv("dataset1.csv")
+filtered_covid_data3 <- covid_data3 %>%
+  filter(State == "West Bengal", Female.Individuals.Vaccinated. >= 1)
+  
+ggplot(data = filtered_covid_data3, mapping = aes(x = Female.Individuals.Vaccinated., y = Sno)) +
+  geom_point(mapping = aes(color = "Red"))+
+  labs(title = paste("Female Individuals Vaccinated in the period 27/06/2021 to 07/07/2021"))
+  
+In this case it does not show any plotting in the graph. This is because data is missing in this region of the dataset. Hence, there is some level of inconsistency in the dataset.
+
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example4.png?raw=true)
+
+# Example 5. Graph plot to visualize the installation of vaccine sites throughout 2020 to 2021
+
+Now, let's try to visualize how the vaccine sites accomodation has changed over the time with respect to the sessions of vaccine doses. 
+
+covid_data3 <- read.csv("covid_vaccine_statewise.csv")
+
+ggplot(data = covid_data3, mapping = aes(x = Sessions, y= Sites)) +
+  geom_point(alpha = 1/3) +
+  geom_line(alpha = 1/3) +
+  geom_smooth()
+  
+This graph plot shows that India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions on the common populi.
+
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5.png?raw=true)
+
+
+The same data if produced in a histogram produces the result:
+
+ggplot(data = covid_data3) +
+  geom_histogram(mapping = aes(x = Sessions), bins = 100)
+  
+The output of the above code is given below:
+![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/example5histogram.png?raw=true)
+
+# Example 6. Graph plot to visualize the state of Odisha in India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions
+
+This graph plot shows for the state of Odisha in India has made an exponential growth (mostly) in developing vaccine sites for conducting vaccination sessions on the common populi after making a slight degradation it has made a steep positive slope indicating the success in setting up new vaccination sites for vaccination purpose.
+
+covid_data4 <- filter(covid_data3, State == "Odisha")
+ggplot(data = covid_data4, mapping = aes(x = Sessions, y = Sites)) +
+  geom_point(mapping = aes(size = Sessions), alpha = 1/3) +
+  geom_smooth()
+
+The output of the above code is given below:
+example6.png  
+
+# Discussion
+
+Our plots suggest that India had tactfully increased the number of vaccination sites across all states to expedite the process of curbing the spread of Covid-19 virus all over the country. The increased number of vaccination sites allowed more vaccination sessions to be conducted thereby making the general population of the people vaccinated to stop the spread of the virus. We also discussed the sudden spike in covid cases initially when Covid-19 hit the country. The spike was found in the state of Kerala and it was essential to know how the cases across Kerala and then further. 
+
+# Conclusion
+
+India, faced with the formidable challenge of the COVID-19 pandemic, exhibited resilience and determination in its fight against the virus. The nation implemented a series of stringent measures, including increase of vaccination sites to carry out successful vaccination drives, to curb the spread of the virus and protect its citizens. Our plots show how  the nation has exponentially grown the installation of vaccination so that proper doses can be administered to those needed. The successful management of the pandemic underscored the importance of effective public health strategies, global collaboration, and the resilience of the Indian people in overcoming adversity.
+
+# Future Scope
+
+The pilot study can be expanded to study the vaccination records and mitigation strategies for other countries.  
+
+# References
+
+https://www.kaggle.com/datasets/sudalairajkumar/covid19-in-india/
+https://www.kaggle.com/code/evangower/visualizing-covid-19-using-r/input
+https://dplyr.tidyverse.org/reference/mutate.html
+https://r4ds.had.co.nz/tidy-data.html
+https://www.mohfw.gov.in/
+https://www.covid19india.org/
+https://www.isibang.ac.in/~athreya/incovid19/
+
+
+
 ![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 ![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
 ![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
