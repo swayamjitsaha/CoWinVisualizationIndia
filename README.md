@@ -7,7 +7,9 @@ We intend to visualize the Covid 19 infection and vaccination patterns across va
 
 We follow the following control map:
 
-![alt text](https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/model.PNG?raw=true)
+<p align="center">
+  <img width="40%" src="https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/model.PNG">
+ </p>
 
 # Step 1: Setting Working Directory for Experiment
 Firstly, we set the working directory under Sessions Tab to access the corresponding CSV files for data processing purpose.
