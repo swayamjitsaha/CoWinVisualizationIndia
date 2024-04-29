@@ -8,7 +8,7 @@ We intend to visualize the Covid 19 infection and vaccination patterns across va
 We follow the following control map:
 
 <p align="center">
-  <img width="40%" src="https://github.com/swayamjitsaha/CoWinVisualizationIndia/tree/main/images/model.PNG">
+  <img width="40%" src="model.PNG">
  </p>
 
 # Step 1: Setting Working Directory for Experiment
